@@ -1,0 +1,64 @@
+---
+title: "Week1 Mushroom"
+author: "Sedo"
+date: "August 26, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Import Data
+
+Also, setnames of columns
+
+```{r importdata}
+library(data.table)
+
+mushroom_DB = read.csv("https://archive.ics.uci.edu/ml/machine-learning-databases/mushroom/agaricus-lepiota.data", header = FALSE)
+mushroom_DB = data.table(mushroom_DB)
+names(mushroom_DB) <-
+  c(
+  "Poison_Edible",
+  "cap_shape",
+  "cap_surface",
+  "cap_color",
+  "bruises",
+  "odor",
+  "gill_attachment",
+  "gill_spacing",
+  "gill_size",
+  "gill_color",
+  "stalk_shape",
+  "stalk_root",
+  "stalk_surface_above_ring",
+  "stalk_surface_below_ring",
+  "stalk_color_above_ring",
+  "stalk_color_below_ring",
+  "veil_type",
+  "veil_color",
+  "ring_number",
+  "ring_type",
+  "spore_print_color",
+  "population",
+  "habitat"
+  )
+```
+## Subset and Transformation
+
+```{r subset and transformation, echo=FALSE}
+
+mushroom_DB_sub <- mushroom_DB[,c(1,2:4,6)]
+
+library(car)
+mushroom_DB_sub$Poison_Edible <- recode(mushroom_DB_sub$Poison_Edible, "'e'='edible'; 'p'='poisonous'")
+mushroom_DB_sub$cap_shape <- recode(mushroom_DB_sub$cap_shape, "'b'='bell';'c'='conical';'x'='convex';'f'='flat';'k'='knobbed';'s'='sunken'")
+mushroom_DB_sub$cap_surface <- recode(mushroom_DB_sub$cap_surface, "'f'='fibrous';'g'='grooves';'y'='scaly';'s'='smooth'")
+mushroom_DB_sub$cap_color <- recode(mushroom_DB_sub$cap_color, "'n'='brown';'b'='buff';'c'='cinnamon';'g'='gray';'r'='green';'p'='pink';'u'='purple';'e'='red';'w'='white';'y'='yellow'")
+mushroom_DB_sub$odor <- recode(mushroom_DB_sub$odor, "'a'='almond';'l'='anise';'c'='creosote';'y'='fishy';'f'='foul';'m'='musty';'n'='none';'p'='pungent';'s'='spicy'")
+
+summary(mushroom_DB_sub)
+
+```
+
