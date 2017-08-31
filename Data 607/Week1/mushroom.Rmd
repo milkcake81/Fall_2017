@@ -47,7 +47,7 @@ names(mushroom_DB) <-
 ```
 ## Subset and Transformation
 
-```{r subset and transformation, echo=FALSE}
+```{r subset and transformation}
 
 mushroom_DB_sub <- mushroom_DB[,c(1,2:4,6)]
 
