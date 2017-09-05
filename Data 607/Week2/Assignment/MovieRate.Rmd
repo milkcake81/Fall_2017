@@ -1,0 +1,39 @@
+---
+title: "Data607 Assignment 2"
+author: "Sedo Oh"
+date: "September 4, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load DB from Sql DB
+
+Use RMySQL library
+
+```{r cars}
+library(RMySQL)
+con <- dbConnect(RMySQL::MySQL(),dbname = "movie_rate", user="root", password="Kakao123")
+query <- dbSendQuery(
+  con,
+  "SELECT
+  Movies.MovieName AS 'MovieName',
+  Users.UserName AS 'UserName',
+  Rating.Rating AS 'Rating'
+  FROM
+  Rating
+  LEFT JOIN
+  Users ON Users.UserID = Rating.UserID
+  LEFT JOIN
+  Movies ON Movies.MovieID = Rating.MovieID
+  ORDER BY UserName;"
+  )
+
+movie_rate <- dbFetch(query)
+
+head(movie_rate)
+```
+
+
