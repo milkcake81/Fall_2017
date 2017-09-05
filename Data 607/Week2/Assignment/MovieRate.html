@@ -128,7 +128,7 @@ $(document).ready(function () {
 <p>Use RMySQL library</p>
 <pre class="r"><code>library(RMySQL)</code></pre>
 <pre><code>## Loading required package: DBI</code></pre>
-<pre class="r"><code>con &lt;- dbConnect(RMySQL::MySQL(),dbname = &quot;movie_rate&quot;, user=&quot;root&quot;, password=&quot;Kakao123&quot;)
+<pre class="r"><code>con &lt;- dbConnect(RMySQL::MySQL(),dbname = &quot;movie_rate&quot;, user=&quot;root&quot;, password=&quot;Password123&quot;)
 query &lt;- dbSendQuery(
   con,
   &quot;SELECT
@@ -148,12 +148,12 @@ movie_rate &lt;- dbFetch(query)
 
 head(movie_rate)</code></pre>
 <pre><code>##          MovieName UserName Rating
-## 1       Spider Man    David      3
-## 2         Iron Man    David      4
-## 3  Captain America    David      3
-## 4     Transformers    David      4
-## 5 Fast and Furious    David      5
-## 6    Despicable Me    David      1</code></pre>
+## 1     Transformers    David      4
+## 2 Fast and Furious    David      5
+## 3    Despicable Me    David      1
+## 4       Spider Man    David      3
+## 5         Iron Man    David      4
+## 6  Captain America    David      3</code></pre>
 </div>
 
 

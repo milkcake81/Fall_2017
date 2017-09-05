@@ -13,9 +13,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Use RMySQL library
 
-```{r cars}
+```{r Pull data from SQL}
 library(RMySQL)
-con <- dbConnect(RMySQL::MySQL(),dbname = "movie_rate", user="root", password="masked")
+con <- dbConnect(RMySQL::MySQL(),dbname = "movie_rate", user="root", password="Password123")
 query <- dbSendQuery(
   con,
   "SELECT

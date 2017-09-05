@@ -4,9 +4,11 @@
  */
 
 -- Drop Tables
-DROP TABLE IF EXISTS Movies;
-DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Rating;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Movies;
+
+
 
 -- Movie List
 CREATE TABLE Movies (
@@ -85,17 +87,17 @@ INSERT INTO Rating (UserID, MovieID, Rating) VALUES (5,6,4);
 Select * from Rating;
 
 -- Combine all 3 tables
-select
-	Movies.MovieName as 'MovieName',
-    Users.UserName as 'UserName',
-    Rating.Rating as 'Rating'
-From
-	Rating
-		LEFT join
-        Users on Users.UserID = Rating.UserID
+SELECT 
+    Movies.MovieName AS 'MovieName',
+    Users.UserName AS 'UserName',
+    Rating.Rating AS 'Rating'
+FROM
+    Rating
         LEFT JOIN
-        Movies ON Movies.MovieID = Rating.MovieID
-Order by UserName;
+    Users ON Users.UserID = Rating.UserID
+        LEFT JOIN
+    Movies ON Movies.MovieID = Rating.MovieID
+ORDER BY UserName;
 
 -- Looks good
 
