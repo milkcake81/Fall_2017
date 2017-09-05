@@ -15,7 +15,7 @@ Use RMySQL library
 
 ```{r cars}
 library(RMySQL)
-con <- dbConnect(RMySQL::MySQL(),dbname = "movie_rate", user="root", password="Kakao123")
+con <- dbConnect(RMySQL::MySQL(),dbname = "movie_rate", user="root", password="masked")
 query <- dbSendQuery(
   con,
   "SELECT
