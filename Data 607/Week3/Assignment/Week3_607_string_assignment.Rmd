@@ -1,0 +1,73 @@
+---
+title: "Data 607 Week 3 Assignment"
+author: "Sedo"
+date: "September 16, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 3
+
+Load Data
+```{r load data}
+raw.data <-"555-1239Moe Szyslak(636) 555-0113Burns, C. Montgomery555-6542Rev. Timothy Lovejoy555 8904Ned Flanders636-555-3226Simpson, Homer5553642Dr. Julius Hibbert"   
+library(stringr)
+name <- unlist(str_extract_all(raw.data, "[[:alpha:]., ]{2,}"))
+```
+Split Name
+```{r split name}
+Namesplit <- str_extract_all(name, "\\w+(\\,)?(\\.\\s\\w+)?" )
+```
+Determine whether it's first name by comma and if so, sweet 1st and 2nd spot. Then combine.
+```{r First and Last Name Format}
+i=1
+NameFirst_Last <- list()
+for (i in 1:length(Namesplit)){
+FirstName_False <- str_count(Namesplit[[i]][1],"\\,")
+if (FirstName_False > 0) {
+temp <- Namesplit[[i]][1]
+Namesplit[[i]][1] <- Namesplit[[i]][2]
+Namesplit[[i]][2] <- temp
+Namesplit[[i]][2] <- unlist(str_extract_all(Namesplit[[i]][2],"\\w+"))
+}
+NameFirst_Last[[i]] <- paste(Namesplit[[i]][1], Namesplit[[i]][2])
+i = i+1
+}
+```
+
+Title detection
+```{r Title Detection}
+string_title <- c("Rev.", "Dr.")
+title_detect <- sapply(string_title, function(x) str_detect(NameFirst_Last,x))
+title_detect_logical <- as.logical(title_detect[,1] + title_detect[,2])
+```
+
+Second name detection
+```{r Second name detection}
+period_detect <- str_detect(NameFirst_Last, "\\.")
+second_name_detect <- as.logical(period_detect - title_detect_logical)
+```
+
+
+## Question 4
+Describe the types of strings that conform to the following regular expressions and
+construct an example that is matched by the regular expression.
+<!-- (a) [0-9]+\\$ -->
+<!-- (b) \[a-z]{1,4 -->
+<!-- (c) .*?\txt$ -->
+<!-- (d) \{2}{2}\d{4} -->
+<!-- (e) <(.+?)>.+?</\1> -->
+
+Description for each in the code
+```{r}
+str_detect("22394$","[0-9]+\\$")   #Many numbers and end with $
+str_detect("baxx", "\\b[a-z]{1,4}\\b")  #empty string at edge of a word followed by lower alphabet charaters from 1 to 4 times, then follwed by empty string at edge of a word
+str_detect("string.txt",".*?\\.txt$")  #any character many times as optional followed by .txt and end of string
+str_detect("01/31/2017","\\d{2}/\\d{2}/\\d{4}") #basic month/day/year format
+str_detect("<abcd>anything</abcd>","<(.+?)>.+?</\\1>") # < followed by parenthesis so that it can be backrefenced.  closed by >.  Followed by any number of character string,  opened by </ then repeat with what was in the parenthesis then close with >
+```
+
+
