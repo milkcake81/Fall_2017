@@ -1,0 +1,55 @@
+---
+title: "TidyPractice"
+author: "Sedo Oh"
+date: "September 23, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tidy Practice
+
+Read in the data
+
+```{r cars}
+setwd("C:\\Users\\soh1\\Box Sync\\CUNY\\Fall_2017\\Data 607\\Week5")
+AirlineRaw <- read.csv("AirlineTime.csv")
+```
+
+Gather City into one column. And then spread out delay vs on time on separate columns
+
+```{r restructure}
+library(tidyr)
+library(dplyr)
+library(tidyselect)
+
+AirlineTrans <- AirlineRaw %>%
+  gather(City, Frequency, 3:7) %>%
+  spread(Time, Frequency)
+```
+
+Let's also summarize by Airlines
+```{r summarize}
+AirlineSum <- AirlineTrans %>%
+  group_by(Airplane) %>%
+  summarise(TotalDelay = sum(delayed))
+```
+
+Now let's use ggplot to compare the airlines performance
+```{r Airline Overall Performance}
+library(ggplot2)
+ggplot(AirlineSum) + aes(Airplane,TotalDelay) + geom_bar(stat="identity", position=position_dodge())
+
+```
+
+AM West is doing much worse than Alaska overall.
+
+Let's take a look at how airlines perform by the city.
+```{r Airline by City}
+ggplot(AirlineTrans) + aes(City,delayed, fill=Airplane) + geom_bar(stat="identity", position=position_dodge())
+
+```
+
+AM West does terribly in Phoenix and Alaska does terribly in Seattle.  
