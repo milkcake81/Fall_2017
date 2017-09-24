@@ -1,0 +1,8 @@
+name: Publish Document
+title:
+account: rpubs
+server: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/306487/53a601a077574718a1d059d8a80b92d1
+bundleId: https://api.rpubs.com/api/v1/document/306487/53a601a077574718a1d059d8a80b92d1
+url: http://rpubs.com/milkcake81/306487
+when: 1506272064.85306

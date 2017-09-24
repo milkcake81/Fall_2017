@@ -320,11 +320,8 @@ qqline(fdims$che.de)
 
 -   Note that normal probability plots C and D have a slight stepwise pattern.  
     Why do you think this is the case?
-    Plot D: People surveyed are "healthy young adults", so most age group will be young with very few going to the old and also not many in the child age as well (but the age distribution range for child is much smaller than older group) So it's skiew right.  
-    
-    TO me, plot C doesn't really have stepwise pattern.  I think plot A does though
-    
-    Plot A: Chest depth probably has a lot to do breast size.  So some women have much bigger breast than others, so you get some outliers on the right.  And of course you get some people with no breast either due to too young age or genetically have small chest.  
+    Plot D: The stepwise pattern comes from the fact that age is integers and there's no number in between age.  
+    Plot C: Elbow diameter is rounded to first decimal points so there's still some stepwise pattern.
     
 
 -   As you can see, normal probability plots can be used both to assess 
